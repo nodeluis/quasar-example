@@ -1,6 +1,8 @@
-import api from '@/api/digital-api';
+import { api } from "src/boot/axios"
+import { SendUserAuth } from "../interfaces/auth.interface"
 
-export const signInUser = async ({ commit }, userd ) => {
+
+export const signInUser = async ({ commit }, userd:SendUserAuth ) => {
 
     const { user, password } = userd
 
@@ -14,7 +16,7 @@ export const signInUser = async ({ commit }, userd ) => {
 
         return { ok: true, message:'Hola '+username+'!!!' }
 
-    } catch (error) {
+    } catch (error:any) {
         return { ok: false, message: error.response.data.message }
     }
 
@@ -50,7 +52,7 @@ export const checkAuthentication = async ({ commit }) => {
         commit('loginUser', { user, token })
         return { ok: true }
 
-    } catch (error) {
+    } catch (error:any) {
         commit('logout')
         return { ok: false, message: error.message }
     }
