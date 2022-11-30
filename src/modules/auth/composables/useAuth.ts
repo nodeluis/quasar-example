@@ -11,16 +11,16 @@ export const useAuth = () => {
 
     const signInUser = async(userd: SendUserAuth):Promise<ResponseSigninApi> => {
 
-        const {message,ok,token,username}=await apiSigninUser(userd);
-        authStore.signInUser({token,username});
-        return {message,ok,token,username};
+        const {message,ok,token,user}=await apiSigninUser(userd);
+        authStore.signInUser({token,user});
+        return {message,ok,token,user};
     };
 
     const checkAuth = async():Promise<ResponseSigninApi> => {
 
-        const {message,ok,token,username}=await checkAuthentication();
-        authStore.signInUser({token,username});
-        return {message,ok,token,username};
+        const {message,ok,token,user}=await checkAuthentication();
+        authStore.signInUser({token,user});
+        return {message,ok,token,user};
     };
 
     return {

@@ -17,8 +17,8 @@ export const useAuthStore = defineStore('auth', {
         }
     },
     actions: {
-        signInUser({token,username}:PushTokenAndUser) {
-            this.user=username;
+        signInUser({token,user}:PushTokenAndUser) {
+            this.user=user;
             this.token=token;
         }
     },

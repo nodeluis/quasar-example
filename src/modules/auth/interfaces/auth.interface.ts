@@ -5,12 +5,12 @@ export interface SendUserAuth {
 
 export interface PushTokenAndUser {
     token:string|null;
-    username:string|null;
+    user:string|null;
 }
 
 export interface ResponseSigninApi{
     ok:boolean;
     message:string;
-    username:string|null;
+    user:string|null;
     token:string|null;
 }

@@ -48,21 +48,21 @@
 import { defineComponent,ref } from 'vue';
 import { useAuth } from '../composables/useAuth';
 import { useQuasar } from 'quasar';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
      setup(){
-        const $q = useQuasar()
 
+        const $q = useQuasar();
         const data = ref({
             user:'',
             password:''
-        })
-
+        });
+        const router = useRouter();
         const {signInUser}= useAuth();
 
         return {
             data,
-
             async onSubmit () {
 
                 const {ok,message}=await signInUser(data.value);
@@ -72,14 +72,15 @@ export default defineComponent({
                         textColor: 'white',
                         icon: 'cloud_done',
                         message
-                    })
+                    });
+                    router.push({ name: 'Digitalización' })
                 }else{
                     $q.notify({
                         color: 'red-5',
                         textColor: 'white',
                         icon: 'warning',
                         message
-                    })
+                    });
                 }
             },
 
