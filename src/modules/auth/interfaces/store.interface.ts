@@ -1,13 +1,9 @@
 export interface AuthStoreState {
     status: string, // 'authenticated','not-authenticated', 'authenticating'
-    user: AuthUser,
+    user: string|null,
     token: string|null,
 }
 
 export interface AuthUser{
     name:string|null;
-}
-  
-export interface AuthStoreGetters {
-    doubleCount: (state: AuthStoreState) => number
 }
