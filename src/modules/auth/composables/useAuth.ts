@@ -23,9 +23,18 @@ export const useAuth = () => {
         return {message,ok,token,user};
     };
 
+    const logout = async():Promise<void>=> {
+
+        localStorage.removeItem('tokendigital');
+        localStorage.removeItem('userdigital');
+        authStore.logout();
+        
+    };
+
     return {
         signInUser,
         checkAuth,
+        logout,
         authStatus: computed(()=> currentState),
     }
 

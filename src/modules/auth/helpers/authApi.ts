@@ -4,12 +4,8 @@ import { ResponseSigninApi, SendUserAuth } from '../interfaces/auth.interface';
 export const apiSigninUser=async(userd: SendUserAuth):Promise<ResponseSigninApi>=>{
     try {
         const { data } = await api.post('/auth/login', { user:userd.user, password:userd.password});
-        console.log(data);
         
-        const { token, user } = data.user;
-        
-        //user.name = displayName
-
+        const { token, user } = data.data;
         //commit('loginUser', { user:username, token:accessToken})
         if(token){
             localStorage.setItem( 'tokendigital', token );
@@ -25,17 +21,24 @@ export const apiSigninUser=async(userd: SendUserAuth):Promise<ResponseSigninApi>
 
 export const checkAuthentication = async ():Promise<ResponseSigninApi> => {
 
-    const token = localStorage.getItem('tokendigital');
-    const user = localStorage.getItem('userdigital');
+    try {
+        const { data } = await api.get('/auth/refresh',{
+            headers:{
+                'Authorization':'Bearer '+localStorage.getItem( 'tokendigital' )
+            }
+        });
+        
+        const { token, user } = data.data;
 
-    if( !token ) {
-        return { ok: false, message: 'No hay token',user:user,token }
+        if(token){
+            localStorage.setItem( 'tokendigital', token );
+            localStorage.setItem( 'userdigital', user );
+        }
+
+        return { ok: true, message:'Hola '+user+'!!!',user,token };
+
+    } catch (error:any) {
+        return { ok: false, message: error.response.data.message,user:null,token:null };
     }
-
-    if( !user ) {
-        return { ok: false, message: 'No hay user',user:user,token }
-    }
-
-    return { ok: true, message: 'Success',user:user,token }
 
 }

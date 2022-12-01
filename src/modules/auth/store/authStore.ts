@@ -20,6 +20,12 @@ export const useAuthStore = defineStore('auth', {
         signInUser({token,user}:PushTokenAndUser) {
             this.user=user;
             this.token=token;
+            this.status='authenticated';
+        },
+        logout() {
+            this.user=null;
+            this.token=null;
+            this.status='not-authenticated';
         }
     },
 });
