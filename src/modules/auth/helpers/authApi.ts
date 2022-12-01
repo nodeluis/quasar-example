@@ -15,7 +15,7 @@ export const apiSigninUser=async(userd: SendUserAuth):Promise<ResponseSigninApi>
         return { ok: true, message:'Hola '+user+'!!!',user,token };
 
     } catch (error:any) {
-        return { ok: false, message: error.response.data.message,user:null,token:null };
+        return { ok: false, message: error.response.data.message,user:null,token:'' };
     }
 }
 
@@ -38,7 +38,7 @@ export const checkAuthentication = async ():Promise<ResponseSigninApi> => {
         return { ok: true, message:'Hola '+user+'!!!',user,token };
 
     } catch (error:any) {
-        return { ok: false, message: error.response.data.message,user:null,token:null };
+        return { ok: false, message: error.response.data.message,user:null,token:'' };
     }
 
 }

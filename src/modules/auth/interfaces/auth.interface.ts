@@ -4,7 +4,7 @@ export interface SendUserAuth {
 }
 
 export interface PushTokenAndUser {
-    token:string|null;
+    token:string;
     user:string|null;
 }
 
@@ -12,5 +12,5 @@ export interface ResponseSigninApi{
     ok:boolean;
     message:string;
     user:string|null;
-    token:string|null;
+    token:string;
 }

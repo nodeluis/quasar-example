@@ -6,7 +6,7 @@ export const useAuthStore = defineStore('auth', {
     state: ():AuthStoreState => ({
         status: 'authenticating', // 'authenticated','not-authenticated', 'authenticating'
         user: null,
-        token: null,
+        token: '',
     }),
     getters: {
         currentState: ( state :AuthStoreState) => {
@@ -14,7 +14,10 @@ export const useAuthStore = defineStore('auth', {
         },
         username:( state:AuthStoreState ) => {
             return state.user || ''
-        }
+        },
+        currentToken: ( state :AuthStoreState) => {
+            return state.token
+        },
     },
     actions: {
         signInUser({token,user}:PushTokenAndUser) {
@@ -24,7 +27,7 @@ export const useAuthStore = defineStore('auth', {
         },
         logout() {
             this.user=null;
-            this.token=null;
+            this.token='';
             this.status='not-authenticated';
         }
     },

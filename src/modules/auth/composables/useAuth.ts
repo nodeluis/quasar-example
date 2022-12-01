@@ -14,6 +14,7 @@ export const useAuth = () => {
         const {message,ok,token,user}=await apiSigninUser(userd);
         authStore.signInUser({token,user});
         return {message,ok,token,user};
+        
     };
 
     const checkAuth = async():Promise<ResponseSigninApi> => {
